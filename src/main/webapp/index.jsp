@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>What the hell of Tomcat!</h2>
+<h2>SSMO2oShop!</h2>
 </body>
 </html>
