@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shop.ssmo2oshop">
+<mapper namespace="com.shop.ssmo2oshop.dao.AreaDao">
 	<select id="queryArea" resultType="com.shop.ssmo2oshop.entity.Area">
 		SELECT area_id,area_name,
 		priority,create_time,last_edit_time
