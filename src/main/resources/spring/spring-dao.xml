@@ -7,22 +7,20 @@
     http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- 配置整合mybatis过程 -->
 	<!-- 1.配置数据库相关参数properties的属性：${url} -->
-	<bean class="com.shop.ssmo2oshop.util.EncryptPropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>classpath:jdbc.properties</value>
-				<value>classpath:redis.properties</value>
-			</list>
-		</property>
-		<property name="fileEncoding" value="UTF-8" />
-	</bean>
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	
 	<!-- 2.数据库连接池 -->
-	<bean id="abstractDataSource" abstract="true"
-		class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- 配置连接池属性 -->
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.master.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		
 		<!-- c3p0连接池的私有属性 -->
 		<property name="maxPoolSize" value="30" />
 		<property name="minPoolSize" value="10" />
-		<property name="initialPoolSize" value="10"/> 
 		<!-- 关闭连接后不自动commit -->
 		<property name="autoCommitOnClose" value="false" />
 		<!-- 获取连接超时时间 -->
@@ -30,35 +28,7 @@
 		<!-- 当获取连接失败重试次数 -->
 		<property name="acquireRetryAttempts" value="2" />
 	</bean>
-	<bean id="master" parent="abstractDataSource">
-		<!-- 配置连接池属性 -->
-		<property name="driverClass" value="${jdbc.driver}" />
-		<property name="jdbcUrl" value="${jdbc.master.url}" />
-		<property name="user" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-	</bean>
-	<bean id="slave" parent="abstractDataSource">
-		<!-- 配置连接池属性 -->
-		<property name="driverClass" value="${jdbc.driver}" />
-		<property name="jdbcUrl" value="${jdbc.slave.url}" />
-		<property name="user" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-	</bean>
-	<!-- 配置动态数据源，这儿targetDataSources就是路由数据源所对应的名称 -->
-	<bean id="dynamicDataSource" class="com.shop.ssmo2oshop.dao.split.DynamicDataSource">
-		<property name="targetDataSources">
-			<map>
-				<entry value-ref="master" key="master"></entry>
-				<entry value-ref="slave" key="slave"></entry>
-			</map>
-		</property>
-	</bean>
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
-		<property name="targetDataSource">
-			<ref bean="dynamicDataSource" />
-		</property>
-	</bean>
+	
 
 	<!-- 3.配置SqlSessionFactory对象 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

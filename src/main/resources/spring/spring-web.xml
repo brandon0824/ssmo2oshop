@@ -22,53 +22,8 @@
 		<property name="prefix" value="/WEB-INF/html/"></property>
 		<property name="suffix" value=".html"></property>
 	</bean>
-	<!-- 文件上传解析器 -->
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="defaultEncoding" value="utf-8"></property>
-		<!-- 1024 * 1024 * 20 = 20M -->
-		<property name="maxUploadSize" value="20971520"></property>
-		<property name="maxInMemorySize" value="20971520"></property>
-	</bean>
 
 	<!-- 4.扫描web相关的bean -->
-	<context:component-scan base-package="com.shop.ssmo2oshop.web" />
-	<!-- 5.权限拦截器 -->
-	<mvc:interceptors>
-		<!-- 校验是否已登录了店家管理系统的拦截器 -->
-		<mvc:interceptor>
-			<mvc:mapping path="/shopadmin/**" />
-			<bean id="ShopInterceptor"
-				class="com.shop.ssmo2oshop.interceptor.shopadmin.ShopLoginInterceptor" />
-		</mvc:interceptor>
-		<!-- 校验是否对该店铺有操作权限的拦截器 -->
-		<mvc:interceptor>
-			<mvc:mapping path="/shopadmin/**" />
-			<!-- shoplist page -->
-			<mvc:exclude-mapping path="/shopadmin/shoplist" />
-			<mvc:exclude-mapping path="/shopadmin/getshoplist" />
-			<!-- shopregister page -->
-			<mvc:exclude-mapping path="/shopadmin/getshopinitinfo" />
-			<mvc:exclude-mapping path="/shopadmin/registershop" />
-			<mvc:exclude-mapping path="/shopadmin/shopoperation" />
-			<!-- shopmanage page -->
-			<mvc:exclude-mapping path="/shopadmin/shopmanagement" />
-			<mvc:exclude-mapping path="/shopadmin/getshopmanagementinfo" />
-			<bean id="ShopPermissionInterceptor"
-				class="com.shop.ssmo2oshop.interceptor.shopadmin.ShopPermissionInterceptor" />
-		</mvc:interceptor>
-		<!-- 超级管理员系统拦截部分 -->
-		<mvc:interceptor>
-			<mvc:mapping path="/superadmin/**" />
-			<mvc:exclude-mapping path="/superadmin/login" />
-			<mvc:exclude-mapping path="/superadmin/logincheck" />
-			<mvc:exclude-mapping path="/superadmin/main" />
-			<mvc:exclude-mapping path="/superadmin/top" />
-			<mvc:exclude-mapping path="/superadmin/clearcache4area" />
-			<mvc:exclude-mapping path="/superadmin/clearcache4headline" />
-			<mvc:exclude-mapping path="/superadmin/clearcache4shopcategory" />
-			<bean id="SuperAdminLoginInterceptor"
-				class="com.shop.ssmo2oshop.interceptor.superadmin.SuperAdminLoginInterceptor" />
-		</mvc:interceptor>
-	</mvc:interceptors>
+	<context:component-scan base-package="com.shop.web" />
+	
 </beans>
