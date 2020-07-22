@@ -17,5 +17,4 @@ SSM = SpringMVC + Spring + MyBatis
 
 ## XMind
 
-![](https://cdn.rawgit.com/brandon0824/ssmo2oshop/master/markmap.svg)
-
+![](https://github.com/brandon0824/ssmo2oshop/blob/master/xmind.html)
