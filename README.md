@@ -14,7 +14,3 @@ SSM = SpringMVC + Spring + MyBatis
 **database**：MySQL<br/>
 **cache**：Redis<br/>
 **deploy**：Aliyun<br/>
-
-## XMind
-
-![](https://github.com/brandon0824/ssmo2oshop/blob/master/xmind.html)
