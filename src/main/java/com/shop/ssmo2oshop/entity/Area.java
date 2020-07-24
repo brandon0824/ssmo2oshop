@@ -3,16 +3,16 @@ package com.shop.ssmo2oshop.entity;
 import java.util.Date;
 
 public class Area {
-	private Integer areaid;//区域id
+	private Integer areaId;//区域id
 	private String areaName;//名称
 	private Integer priority;//权重
 	private Date createTime;//创建时间
 	private Date lastEditTime;//更新时间
-	public Integer getAreaid() {
-		return areaid;
+	public Integer getAreaId() {
+		return areaId;
 	}
-	public void setAreaid(Integer areaid) {
-		this.areaid = areaid;
+	public void setAreaId(Integer areaId) {
+		this.areaId = areaId;
 	}
 	public String getAreaName() {
 		return areaName;
