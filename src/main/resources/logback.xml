@@ -9,13 +9,14 @@
 	<property name="log.filePath"
 		value="${catalina.base}/logs/webapps" />
 	<property name="log.pattern"
-		value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thead] %-5level %logger{50} - %msg%n" />
+		value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n" />
 	<!-- 控制台设置 -->
 	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>${log.pattern}</pattern>
 		</encoder>
 	</appender>
+	<!-- 三个级别DEBUG/INFO/ERROR -->
 	<!-- DEBUG -->
 	<appender name="debugAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<!-- 文件路径 -->
@@ -26,10 +27,10 @@
 				${log.filePath}/debug/debug.%d{yyyy-MM-dd}.log.gz
 			</fileNamePattern>
 			<!-- 文件最大保存历史数量 -->
-			<MaxHistory>${log.maxHistory}</MaxHistory>
+			<maxHistory>${log.maxHistory}</maxHistory>
 		</rollingPolicy>
 		<encoder>
-			<pattern>${log.pattern</pattern>
+			<pattern>${log.pattern}</pattern>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>DEBUG</level>
@@ -47,10 +48,10 @@
 				${log.filePath}/info/info.%d{yyyy-MM-dd}.log.gz
 			</fileNamePattern>
 			<!-- 文件最大保存历史数量 -->
-			<MaxHistory>${log.maxHistory}</MaxHistory>
+			<maxHistory>${log.maxHistory}</maxHistory>
 		</rollingPolicy>
 		<encoder>
-			<pattern>${log.pattern</pattern>
+			<pattern>${log.pattern}</pattern>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>INFO</level>
@@ -68,10 +69,10 @@
 				${log.filePath}/error/error.%d{yyyy-MM-dd}.log.gz
 			</fileNamePattern>
 			<!-- 文件最大保存历史数量 -->
-			<MaxHistory>${log.maxHistory}</MaxHistory>
+			<maxHistory>${log.maxHistory}</maxHistory>
 		</rollingPolicy>
 		<encoder>
-			<pattern>${log.pattern</pattern>
+			<pattern>${log.pattern}</pattern>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>ERROR</level>
