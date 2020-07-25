@@ -123,7 +123,7 @@
 			<version>0.9.5.4</version>
 		</dependency>
 		
-		<!-- 图片处理 -->
+		<!-- 图片处理Thumbnailator -->
 		<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
 		<dependency>
 		    <groupId>net.coobird</groupId>
