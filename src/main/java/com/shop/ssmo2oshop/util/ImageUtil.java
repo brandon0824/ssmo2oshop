@@ -36,7 +36,7 @@ public class ImageUtil {
 		return newFile;
 	}
 	
-	//处理缩略图 并返回新生成图片的相对值路径
+	//处理缩略图 并返回新生成图片的相对路径
 	public static String generateThumbnail(File thumbnail, String targetAddr) {
 		String realFileName = getRandomFileName();
 		String extension = getFileExtension(thumbnail);

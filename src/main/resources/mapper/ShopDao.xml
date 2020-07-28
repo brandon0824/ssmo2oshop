@@ -6,14 +6,20 @@
 	<insert id="insertShop" useGeneratedKeys="true"
 		keyColumn="shop_id" keyProperty="shopId">
 		INSERT INTO
-		tb_shop(owner_id, area_id, shop_category_id, shop_name, shop_desc, shop_addr,
-		phone, shop_img, priority, create_time, last_edit_time, enable_status, advice)
+		tb_shop(owner_id, area_id,
+		shop_category_id,
+		shop_name, shop_desc, shop_addr,
+		phone, shop_img,
+		priority,
+		create_time, last_edit_time, enable_status,
+		advice)
 		VALUES
-		(#{owner.userId}, #{area.areaId}, #{shopCategory.shopCategoryId}, #{shopName},
-		#{shopDesc},#{shopAddr}, #{phone}, #{shopImg}, #{priority},
-		#{createTime}, #{lastEditTime}, #{enableStatus}, #{advice})
+		(#{owner.userId},#{area.areaId},#{shopCategory.shopCategoryId},#{shopName},
+		#{shopDesc},#{shopAddr},#{phone},#{shopImg},#{priority},
+		#{createTime},#{lastEditTime}, #{enableStatus},#{advice})
 	</insert>
-	<update id="updateShop" parameterType="com.shop.ssmo2oshop.entity.Shop">
+	<update id="updateShop"
+		parameterType="com.shop.ssmo2oshop.entity.Shop">
 		update tb_shop
 		<set>
 			<if test="shopName != null">shop_name=#{shopName},</if>
@@ -25,7 +31,7 @@
 			<if test="lastEditTime != null">last_edit_time=#{lastEditTime},</if>
 			<if test="enableStatus != null">enable_status=#{enableStatus},</if>
 			<if test="advice != null">advice=#{advice},</if>
-			<if test="area != null">area_id=#{areaId},</if>
+			<if test="area != null">area_id=#{area.areaId},</if>
 			<if test="shopCategory != null">shop_category_id=#{shopCategory.shopCategoryId}</if>
 		</set>
 		where shop_id=#{shopId}
