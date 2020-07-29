@@ -4,13 +4,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +34,7 @@ public class ShopManagementController {
 	@Autowired
 	private ShopService shopService;
 	
-	@RequestMapping(value = "register", method = RequestMethod.POST)
+	@RequestMapping(value = "/registershop", method = RequestMethod.POST)
 	@ResponseBody
 	private Map<String, Object> registerShop(HttpServletRequest request) {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
@@ -64,7 +62,7 @@ public class ShopManagementController {
 			modelMap.put("errMsg", "上传图片不能为空");
 			return modelMap;
 		}
-		// 2.注册店铺
+		// 2.注册店铺	3.返回结果(体现在try-catch中)
 		if (shop != null && shopImg != null) {
 			PersonInfo owner = new PersonInfo();
 			owner.setUserId(1L);
@@ -91,6 +89,7 @@ public class ShopManagementController {
 				modelMap.put("success", false);
 				modelMap.put("errMsg", se.getStateInfo());
 			}
+			return modelMap;
 		} else {
 			modelMap.put("success", false);
 			modelMap.put("errMsg", "请输入店铺信息");
