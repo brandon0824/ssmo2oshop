@@ -2,6 +2,7 @@ package com.shop.ssmo2oshop.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -37,16 +38,16 @@ public class ImageUtil {
 	}
 	
 	//处理缩略图 并返回新生成图片的相对路径
-	public static String generateThumbnail(File thumbnail, String targetAddr) {
+	public static String generateThumbnail(InputStream thumbnailInputStream, String fileName, String targetAddr) {
 		String realFileName = getRandomFileName();
-		String extension = getFileExtension(thumbnail);
+		String extension = getFileExtension(fileName);
 		makeDirPath(targetAddr);
 		String relativeAddr = targetAddr + realFileName + extension;
 		logger.debug("Current relative address is:" + relativeAddr);
 		File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
 		logger.debug("Current complete address is:" + PathUtil.getImgBasePath() + relativeAddr);
 		try {
-			Thumbnails.of(thumbnail).size(200, 200).watermark(Positions.BOTTOM_RIGHT, 
+			Thumbnails.of(thumbnailInputStream).size(200, 200).watermark(Positions.BOTTOM_RIGHT, 
 					ImageIO.read(new File(basePath+"/watermark.jpg")), 0.25f)
 			.outputQuality(0.8).toFile(dest);
 		}
@@ -67,11 +68,9 @@ public class ImageUtil {
 		}
 	}
 
-	private static String getFileExtension(File cFile) {
+	private static String getFileExtension(String fileName) {
 		//获取输入文件流的扩展名 .jpg/.png
-		String originalFileName = cFile.getName();
-		
-		return originalFileName.substring(originalFileName.lastIndexOf("."));
+		return fileName.substring(fileName.lastIndexOf("."));
 	}
 
 	//生成随机文件名 当前年月日小时分钟秒钟+五位随机数
