@@ -1,9 +1,6 @@
 package com.shop.ssmo2oshop.web.shopadmin;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,8 +23,6 @@ import com.shop.ssmo2oshop.enums.ShopStateEnum;
 import com.shop.ssmo2oshop.exceptions.ShopOperationException;
 import com.shop.ssmo2oshop.service.ShopService;
 import com.shop.ssmo2oshop.util.HttpServletRequestUtil;
-import com.shop.ssmo2oshop.util.ImageUtil;
-import com.shop.ssmo2oshop.util.PathUtil;
 
 @Controller
 @RequestMapping("/shopadmin")

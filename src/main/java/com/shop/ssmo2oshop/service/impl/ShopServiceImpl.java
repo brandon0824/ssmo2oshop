@@ -1,6 +1,5 @@
 package com.shop.ssmo2oshop.service.impl;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.Date;
 
@@ -67,7 +66,3 @@ public class ShopServiceImpl implements ShopService{
 	}
 	
 }
-
-
-
-
