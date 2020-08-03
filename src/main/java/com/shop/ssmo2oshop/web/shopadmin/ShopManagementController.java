@@ -21,6 +21,8 @@ import com.shop.ssmo2oshop.entity.PersonInfo;
 import com.shop.ssmo2oshop.entity.Shop;
 import com.shop.ssmo2oshop.enums.ShopStateEnum;
 import com.shop.ssmo2oshop.exceptions.ShopOperationException;
+import com.shop.ssmo2oshop.service.AreaService;
+import com.shop.ssmo2oshop.service.ShopCategoryService;
 import com.shop.ssmo2oshop.service.ShopService;
 import com.shop.ssmo2oshop.util.HttpServletRequestUtil;
 
@@ -29,6 +31,18 @@ import com.shop.ssmo2oshop.util.HttpServletRequestUtil;
 public class ShopManagementController {
 	@Autowired
 	private ShopService shopService;
+	
+	@Autowired
+	private ShopCategoryService shopCategoryService;
+	
+	@Autowired
+	private AreaService areaService;
+	
+	@RequestMapping(value="/getshopinitinfo", method=RequestMethod.GET)
+	@ResponseBody
+	private Map<String, Object> getShopInitInfo(){
+		
+	}
 
 	@RequestMapping(value = "/registershop", method = RequestMethod.POST)
 	@ResponseBody
