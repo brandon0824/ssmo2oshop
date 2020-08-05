@@ -28,6 +28,7 @@ import com.shop.ssmo2oshop.exceptions.ShopOperationException;
 import com.shop.ssmo2oshop.service.AreaService;
 import com.shop.ssmo2oshop.service.ShopCategoryService;
 import com.shop.ssmo2oshop.service.ShopService;
+import com.shop.ssmo2oshop.util.CodeUtil;
 import com.shop.ssmo2oshop.util.HttpServletRequestUtil;
 
 @Controller
@@ -67,6 +68,12 @@ public class ShopManagementController {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		// 1.接收并转化响应的参数 包括店铺信息和图片信息
 
+		if(!CodeUtil.checkVerifyCode(request)) {
+			modelMap.put("success", false);
+			modelMap.put("errMsg", "输入了错误的验证码");
+			return modelMap;
+		}
+		
 		// 从request中提取shopStr 转换为字符串
 		String shopStr = HttpServletRequestUtil.getString(request, "shopStr");
 
