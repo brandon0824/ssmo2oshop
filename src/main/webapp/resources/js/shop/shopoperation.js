@@ -46,7 +46,7 @@ $(function() {
 				return !this.selected;
 			}).data('id')
 		};
-		// 获取上传的图片文件流
+		// 获取上传的图片文件流 
 		var shopImg = $('#shop-img')[0].files[0];
 
 		// 生成表单对象，用于接收参数并传递给后台
