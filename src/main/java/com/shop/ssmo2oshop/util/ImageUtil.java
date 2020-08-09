@@ -9,6 +9,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import org.apache.jasper.tagplugins.jstl.core.If;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -79,6 +80,22 @@ public class ImageUtil {
 		int rannum = r.nextInt(89999) + 10000;
 		String nowTimeStr = sDateFormat.format(new Date());
 		return nowTimeStr + rannum;
+	}
+	
+	// storePath是文件路径还是目录的路径
+	// 若storePath是文件路径则删除该文件
+	// 若storePath是目录路径则删除该目录下的所有文件
+	public static void deleteFileOrPath(String storePath) {
+		File fileOrPath = new File(PathUtil.getImgBasePath() + storePath);
+		if(fileOrPath.exists()) {
+			if(fileOrPath.isDirectory()) {
+				File files[] = fileOrPath.listFiles();
+				for(int i = 0; i < files.length; i++) {
+					files[i].delete();
+				}
+			}
+			fileOrPath.delete();
+		}
 	}
 
 	public static void main(String[] args) {
