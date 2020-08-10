@@ -79,6 +79,7 @@ public class ShopServiceImpl implements ShopService{
 			return new ShopExecution(ShopStateEnum.NULL_SHOP);
 		}else {
 			// 1. 判断是否需要处理图片
+			try {
 			if(shopImgInputStream != null && fileName != null && !"".equals(fileName)) {
 				Shop tempShop = shopDao.queryByShopId(shop.getShopId());
 				if(tempShop.getShopImg() != null) {
@@ -94,9 +95,10 @@ public class ShopServiceImpl implements ShopService{
 			}else {
 				shop = shopDao.queryByShopId(shop.getShopId());
 				return new ShopExecution(ShopStateEnum.SUCCESS, shop);
+			}}catch(Exception e) {
+				throw new ShopOperationException("modifyShop error" + e.getMessage());
 			}
 		}
-		return null;
 	}
 	
 }

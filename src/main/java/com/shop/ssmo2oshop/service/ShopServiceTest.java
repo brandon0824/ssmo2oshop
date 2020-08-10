@@ -18,10 +18,22 @@ import com.shop.ssmo2oshop.entity.PersonInfo;
 import com.shop.ssmo2oshop.entity.Shop;
 import com.shop.ssmo2oshop.entity.ShopCategory;
 import com.shop.ssmo2oshop.enums.ShopStateEnum;
+import com.shop.ssmo2oshop.exceptions.ShopOperationException;
 
 public class ShopServiceTest extends BaseTest{
 	@Autowired
 	private ShopService shopService;
+	
+	@Test
+	public void testModifyShop() throws ShopOperationException, FileNotFoundException {
+		Shop shop = new Shop();
+		shop.setShopId(1L);
+		shop.setShopName("修改后的店铺名称");
+		File shopImg = new File("G:\\dabai.jpg");
+		InputStream is = new FileInputStream(shopImg);
+		ShopExecution shopExecution = shopService.modifyShop(shop, is, "dabai.jpg");
+		System.out.println("新的图片地址为：" + shopExecution.getShop().getShopImg());
+	}
 	
 	@Test
 	public void testAddShop() throws FileNotFoundException {
