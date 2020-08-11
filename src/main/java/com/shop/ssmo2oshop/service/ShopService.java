@@ -15,5 +15,7 @@ public interface ShopService {
 	// 更新店铺信息包括对图片的处理
 	ShopExecution modifyShop(Shop shop, InputStream shopImgInputStream, String fileName) throws ShopOperationException;
 	
+	// 根据shopCondition分页返回相应店铺列表
+	public ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize);
 	
 }

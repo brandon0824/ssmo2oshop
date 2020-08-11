@@ -2,6 +2,7 @@ package com.shop.ssmo2oshop.service.impl;
 
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.scripting.xmltags.IfSqlNode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.shop.ssmo2oshop.enums.ShopStateEnum;
 import com.shop.ssmo2oshop.exceptions.ShopOperationException;
 import com.shop.ssmo2oshop.service.ShopService;
 import com.shop.ssmo2oshop.util.ImageUtil;
+import com.shop.ssmo2oshop.util.PageCalculator;
 import com.shop.ssmo2oshop.util.PathUtil;
 
 @Service
@@ -99,6 +101,21 @@ public class ShopServiceImpl implements ShopService{
 				throw new ShopOperationException("modifyShop error" + e.getMessage());
 			}
 		}
+	}
+
+	@Override
+	public ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize) {
+		int rowIndex = PageCalculator.calculateRowIndex(pageIndex, pageSize);
+		List<Shop> shopList = shopDao.queryShopList(shopCondition, rowIndex, pageSize);
+		int count = shopDao.queryShopCount(shopCondition);
+		ShopExecution se = new ShopExecution();
+		if(shopList != null) {
+			se.setShopList(shopList);
+			se.setCount(count);
+		}else {
+			se.setState(ShopStateEnum.INNER_ERROR.getState());
+		}
+		return se;
 	}
 	
 }
