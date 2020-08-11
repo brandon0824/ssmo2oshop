@@ -6,10 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
-import org.omg.PortableServer.POAPackage.ObjectAlreadyActiveHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -126,18 +124,23 @@ public class ShopManagementController {
 		}
 		// 2.注册店铺 3.返回结果(体现在try-catch中)
 		if (shop != null && shopImg != null) {
-			PersonInfo owner = new PersonInfo();
-			
-			// Session TODO
-			owner.setUserId(1L);
+			// Session
+			PersonInfo owner = (PersonInfo)request.getSession().getAttribute("user");
 			shop.setOwner(owner);
-			
-			
 			ShopExecution se;
 			try {
 				se = shopService.addShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
 				if (se.getState() == ShopStateEnum.CHECK.getState()) {
 					modelMap.put("success", true);
+					// 该用户可以操作的店铺列表
+					@SuppressWarnings("unchecked")
+					List<Shop> shopList = (List<Shop>)request.getSession().getAttribute("shopList");
+					if(shopList == null || shopList.size() == 0) {
+						shopList = new ArrayList<Shop>();
+					}
+						shopList.add(se.getShop());
+						request.getSession().setAttribute("shopList", shopList);
+					
 				} else {
 					modelMap.put("success", false);
 					modelMap.put("errMsg", se.getStateInfo());
@@ -189,10 +192,7 @@ public class ShopManagementController {
 		}
 		// 2.修改店铺信息
 		if (shop != null && shop.getShopId() != null) {
-			PersonInfo owner = new PersonInfo();
-			owner.setUserId(1L);
-			shop.setOwner(owner);
-			
+
 			ShopExecution se;
 			try {
 				if(shopImg == null) {
@@ -200,7 +200,7 @@ public class ShopManagementController {
 				}else {
 					se = shopService.modifyShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
 				}
-				if (se.getState() == ShopStateEnum.CHECK.getState()) {
+				if (se.getState() == ShopStateEnum.SUCCESS.getState()) {
 					modelMap.put("success", true);
 				} else {
 					modelMap.put("success", false);
@@ -213,7 +213,7 @@ public class ShopManagementController {
 			return modelMap;
 		} else {
 			modelMap.put("success", false);
-			modelMap.put("errMsg", "请输入店铺信息");
+			modelMap.put("errMsg", "请输入店铺Id");
 			return modelMap;
 		}
 		// 3.返回结果

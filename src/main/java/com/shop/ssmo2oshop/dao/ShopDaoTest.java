@@ -3,6 +3,7 @@ package com.shop.ssmo2oshop.dao;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -57,11 +58,32 @@ public class ShopDaoTest extends BaseTest {
 	}
 	
 	@Test
+	@Ignore
 	public void testQueryByShopId() {
 		long shopId = 1;
 		Shop shop = shopDao.queryByShopId(shopId);
 		System.out.println("areaId:" + shop.getArea().getAreaId());
 		System.out.println("areaName:" + shop.getArea().getAreaName());
+	}
+	
+	@Test
+	public void testQueryShopListAndCount() {
+		Shop shopCondition = new Shop();
+		PersonInfo owner = new PersonInfo();
+		owner.setUserId(1L);
+		shopCondition.setOwner(owner);
+		List<Shop> shopList = shopDao.queryShopList(shopCondition, 0, 3);
+		int count = shopDao.queryShopCount(shopCondition);
+		System.out.println("owner_id=1的List中店铺列表数量：" + shopList.size());
+		System.out.println("owner_id=1店铺总数：" + count);
+		ShopCategory sc = new ShopCategory();
+		sc.setShopCategoryId(3L);
+		shopCondition.setShopCategory(sc);
+		shopList = shopDao.queryShopList(shopCondition, 0, 1);
+		System.out.println("owner_id=1,shopCategoryId=3的List中店铺列表的大小：" + shopList.size());
+		count = shopDao.queryShopCount(shopCondition);
+		System.out.println("owner_id=1,shopCategoryId=3店铺总数：" + count);
+		
 	}
 	
 	
