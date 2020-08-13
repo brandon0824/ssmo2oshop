@@ -2,7 +2,9 @@ package com.shop.ssmo2oshop.service;
 
 import java.util.List;
 
+import com.shop.ssmo2oshop.dto.ProductCategoryExecution;
 import com.shop.ssmo2oshop.entity.ProductCategory;
+import com.shop.ssmo2oshop.exceptions.ProductCategoryOperationException;
 
 public interface ProductCategoryService {
 
