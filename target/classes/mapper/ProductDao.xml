@@ -36,6 +36,7 @@
 			<result column="product_id" property="productId" />
 		</collection>
 	</resultMap>
+	
 	<select id="queryProductList" resultType="com.shop.ssmo2oshop.entity.Product">
 		SELECT
 		product_id,
@@ -101,6 +102,7 @@
 			</if>
 		</where>
 	</select>
+	
 	<select id="queryProductById" resultMap="productMap"
 		parameterType="Long">
 		<!-- 具体的sql -->
@@ -136,6 +138,7 @@
 		ORDER BY
 		pm.priority DESC
 	</select>
+	
 	<insert id="insertProduct" parameterType="com.shop.ssmo2oshop.entity.Product"
 		useGeneratedKeys="true" keyProperty="productId" keyColumn="product_id">
 		INSERT INTO
@@ -149,6 +152,7 @@
 		#{lastEditTime},#{enableStatus},#{point},#{productCategory.productCategoryId},
 		#{shop.shopId})
 	</insert>
+	
 	<update id="updateProduct" parameterType="com.shop.ssmo2oshop.entity.Product"
 		keyProperty="product_id" useGeneratedKeys="true">
 		UPDATE tb_product
@@ -171,6 +175,7 @@
 		WHERE product_id = #{productId}
 		AND shop_id=#{shop.shopId}
 	</update>
+	
 	<update id="updateProductCategoryToNull" parameterType="Long">
 		UPDATE
 		tb_product
@@ -179,6 +184,7 @@
 		WHERE product_category_id =
 		#{productCategoryId}
 	</update>
+	
 	<delete id="deleteProduct">
 		DELETE FROM
 		tb_product
