@@ -20,7 +20,7 @@ public class ProductCategoryExecution {
 	
 	// 操作失败时使用的构造器
 	public ProductCategoryExecution(ProductCategoryStateEnum stateEnum) {
-		this.state = state;
+		this.state = stateEnum.getState();
 		this.stateInfo = stateEnum.getStateInfo();
 	}
 	

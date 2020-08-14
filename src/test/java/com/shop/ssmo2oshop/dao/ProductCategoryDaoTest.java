@@ -6,27 +6,28 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.Ignore;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.shop.ssmo2oshop.BaseTest;
 import com.shop.ssmo2oshop.entity.ProductCategory;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProductCategoryDaoTest extends BaseTest {
 	@Autowired
 	private ProductCategoryDao productCategoryDao;
 
 	@Test
-	@Ignore
-	public void testQueryByShopId() throws Exception {
+	public void testBQueryByShopId() throws Exception {
 		long shopId = 1;
 		List<ProductCategory> productCategoryList = productCategoryDao.queryProductCategoryList(shopId);
 		System.out.println("该店铺自定义类别数：" + productCategoryList.size());
 	}
 
 	@Test
-	public void testBatchInsertProductCategory() throws Exception {
+	public void testABatchInsertProductCategory() {
 		ProductCategory productCategory = new ProductCategory();
 		productCategory.setProductCategoryName("商品类别1");
 		productCategory.setPriority(1);
@@ -43,5 +44,25 @@ public class ProductCategoryDaoTest extends BaseTest {
 		int effectedNum = productCategoryDao.batchInsertProductCategory(productCategoryList);
 		assertEquals(2, effectedNum);
 	}
+	
+	@Test
+	public void testCDeleteProductCategory() throws Exception {
+		long shopId = 1;
+		List<ProductCategory> productCategoryList = productCategoryDao.queryProductCategoryList(shopId);
+		for (ProductCategory pc : productCategoryList) {
+			if ("商品类别1".equals(pc.getProductCategoryName()) || "商品类别2".equals(pc.getProductCategoryName())) {
+				int effectedNum = productCategoryDao.deleteProductCategory(pc.getProductCategoryId(),
+						shopId);
+				assertEquals(1, effectedNum);
+			}
+		}
+	}
 
 }
+
+
+
+
+
+
+
