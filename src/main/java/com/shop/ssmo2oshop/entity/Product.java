@@ -11,7 +11,7 @@ public class Product {
 	private String normalPrice;
 	private String promotionPrice;
 	private Integer priority;
-	private Integer point;
+	private Integer point;// 商品积分
 	private Date createTime;
 	private Date lastEditTime;// 0.下架 1.在前端展示系统展示
 	private Integer enableStatus;// 图片详情图列表，跟商品是多对一的关系
