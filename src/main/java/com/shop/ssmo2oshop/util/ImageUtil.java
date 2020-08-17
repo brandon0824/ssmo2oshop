@@ -129,8 +129,8 @@ public class ImageUtil {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			Thumbnails.of(new File("G:\\xiaohuangren.jpg")).size(200, 200).watermark(Positions.BOTTOM_RIGHT, 
-					ImageIO.read(new File(basePath+"/watermark.jpg")), 0.25f).outputQuality(0.8f).toFile("G:\\xiaohuangrennew.jpg");
+			Thumbnails.of(new File("G:\\ssmpic\\xiaohuangren.jpg")).size(200, 200).watermark(Positions.BOTTOM_RIGHT, 
+					ImageIO.read(new File(basePath+"/watermark.jpg")), 0.25f).outputQuality(0.8f).toFile("G:\\ssmpic\\xiaohuangrennew.jpg");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

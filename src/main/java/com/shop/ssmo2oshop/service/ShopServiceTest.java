@@ -32,7 +32,7 @@ public class ShopServiceTest extends BaseTest{
 		Shop shop = new Shop();
 		shop.setShopId(1L);
 		shop.setShopName("修改后的店铺名称");
-		File shopImg = new File("G:\\dabai.jpg");
+		File shopImg = new File("G:\\ssmpic\\dabai.jpg");
 		InputStream is = new FileInputStream(shopImg);
 		ImageHolder imageHolder = new ImageHolder("dabai.jpg", is);
 		ShopExecution shopExecution = shopService.modifyShop(shop, imageHolder);
@@ -59,7 +59,7 @@ public class ShopServiceTest extends BaseTest{
 		shop.setCreateTime(new Date());
 		shop.setEnableStatus(ShopStateEnum.CHECK.getState());
 		shop.setAdvice("审核中");
-		File shopImg = new File("G:\\xiaohuangrennew.jpg");
+		File shopImg = new File("G:\\ssmpic\\xiaohuangrennew.jpg");
 		InputStream is = new FileInputStream(shopImg);
 		ImageHolder imageHolder = new ImageHolder(shopImg.getName(), is);
 		ShopExecution se = shopService.addShop(shop, imageHolder);
