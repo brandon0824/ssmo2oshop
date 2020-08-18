@@ -38,4 +38,28 @@ public class HeadLineServiceImpl implements HeadLineService {
 		return headLineDao.queryHeadLine(headLineCondition);
 	}
 
+	@Override
+	public HeadLineExecution addHeadLine(HeadLine headLine, ImageHolder thumbnail) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HeadLineExecution modifyHeadLine(HeadLine headLine, ImageHolder thumbnail) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HeadLineExecution removeHeadLine(long headLineId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HeadLineExecution removeHeadLineList(List<Long> headLineIdList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
