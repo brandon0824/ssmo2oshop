@@ -68,21 +68,35 @@ public class ShopDaoTest extends BaseTest {
 	
 	@Test
 	public void testQueryShopListAndCount() {
+//		Shop shopCondition = new Shop();
+//		PersonInfo owner = new PersonInfo();
+//		owner.setUserId(1L);
+//		shopCondition.setOwner(owner);
+//		List<Shop> shopList = shopDao.queryShopList(shopCondition, 0, 3);
+//		int count = shopDao.queryShopCount(shopCondition);
+//		System.out.println("owner_id=1的List中店铺列表数量：" + shopList.size());
+//		System.out.println("owner_id=1店铺总数：" + count);
+//		ShopCategory sc = new ShopCategory();
+//		sc.setShopCategoryId(3L);
+//		shopCondition.setShopCategory(sc);
+//		shopList = shopDao.queryShopList(shopCondition, 0, 1);
+//		System.out.println("owner_id=1,shopCategoryId=3的List中店铺列表的大小：" + shopList.size());
+//		count = shopDao.queryShopCount(shopCondition);
+//		System.out.println("owner_id=1,shopCategoryId=3店铺总数：" + count);
+		
+		
+		// 去除parentId为1的shop_category_id的所有shop
 		Shop shopCondition = new Shop();
-		PersonInfo owner = new PersonInfo();
-		owner.setUserId(1L);
-		shopCondition.setOwner(owner);
-		List<Shop> shopList = shopDao.queryShopList(shopCondition, 0, 3);
+		ShopCategory childCategory = new ShopCategory();
+		ShopCategory parentCategory = new ShopCategory();
+		
+		parentCategory.setShopCategoryId(1L);
+		childCategory.setParent(parentCategory);
+		shopCondition.setShopCategory(childCategory);
+		List<Shop> shopList = shopDao.queryShopList(shopCondition, 0, 6);
 		int count = shopDao.queryShopCount(shopCondition);
-		System.out.println("owner_id=1的List中店铺列表数量：" + shopList.size());
-		System.out.println("owner_id=1店铺总数：" + count);
-		ShopCategory sc = new ShopCategory();
-		sc.setShopCategoryId(3L);
-		shopCondition.setShopCategory(sc);
-		shopList = shopDao.queryShopList(shopCondition, 0, 1);
-		System.out.println("owner_id=1,shopCategoryId=3的List中店铺列表的大小：" + shopList.size());
-		count = shopDao.queryShopCount(shopCondition);
-		System.out.println("owner_id=1,shopCategoryId=3店铺总数：" + count);
+		System.out.println("店铺列表的大小：" + shopList.size());
+		System.out.println("店铺总数：" + count);
 		
 	}
 	
