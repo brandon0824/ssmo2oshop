@@ -3,19 +3,19 @@ package com.shop.ssmo2oshop.entity;
 import java.util.Date;
 
 public class HeadLine {
-	private Long lingId;
+	private Long lineId;
 	private String lineName;
-	private String lineLink;
+	private String lineLink;//跳转链接
 	private String lineImg;
 	private Integer priority;
 	private Integer enableStatus;//0.不可用 1.可用
 	private Date createTime;
 	private Date lastEditTime;
-	public Long getLingId() {
-		return lingId;
+	public Long getLineId() {
+		return lineId;
 	}
-	public void setLingId(Long lingId) {
-		this.lingId = lingId;
+	public void setLineId(Long lineId) {
+		this.lineId = lineId;
 	}
 	public String getLineName() {
 		return lineName;
